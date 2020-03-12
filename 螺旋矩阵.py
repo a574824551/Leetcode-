@@ -14,3 +14,5 @@ class Solution(object):
                 i += di
                 j += dj
         return r
+
+        #参考了评论区Tokisaki Kurumi的代码
