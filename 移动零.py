@@ -6,5 +6,5 @@ class Solution(object):
         """
         for i in range(len(nums)):
             if nums[i]==0:
-                del(nums[i])
+                nums.remove(0)
                 nums.append(0)
