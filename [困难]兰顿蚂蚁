@@ -1,0 +1,61 @@
+class Solution(object):
+    def printKMoves(self, K):
+        """
+        :type K: int
+        :rtype: List[str]
+        """
+        des=[('R',(1,0)),('D',(0,-1)),('L',(-1,0)),('U',(0,1))]
+        num=0
+        
+        cur_x=0
+        cur_y=0
+        min_x=0
+        max_x=0
+        min_y=0
+        max_y=0
+        map_dict = {}
+        for i in range(K):
+            #计算当前位置
+            cur_x=des[num][1][0]+cur_x
+            cur_y=des[num][1][1]+cur_y
+            
+            #判断当前位置是否来过
+            if (cur_x,cur_y) in map_dict:
+                if map_dict[(cur_x,cur_y)]=='X':#黑色
+                    map_dict[(cur_x,cur_y)]='_'
+                    num=(num+3)%4#左转
+                elif map_dict[(cur_x,cur_y)]=='_':#//白色
+                    map_dict[(cur_x,cur_y)]='X'
+                    num=(num+1)%4#右转         
+            else:#没来过
+                map_dict[(cur_x,cur_y)]='X'
+                num=(num+1)%4
+                min_x=min(min_x,cur_x)
+                max_x=max(max_x,cur_x)
+                min_y=min(min_y,cur_y)
+                max_y=max(max_y,cur_y)
+                
+        
+        #计算下一步位置
+        if K==0:return ["R"]
+        if K==1:return ["X","D"]
+        cur_x=des[num][1][0]+cur_x
+        cur_y=des[num][1][1]+cur_y
+        map_dict[(cur_x,cur_y)]=des[num][0]
+        min_x=min(min_x,cur_x)
+        max_x=max(max_x,cur_x)
+        min_y=min(min_y,cur_y)
+        max_y=max(max_y,cur_y)
+        #输出结果
+        output=[]
+        key_list=map_dict.keys()
+        for y in range(min_y,max_y+1)[::-1]:
+            tmp=[]
+            for x in range(min_x,max_x+1): 
+                if (x,y) in key_list:
+                    tmp.append(map_dict[(x,y)])
+                else:
+                    tmp.append("_")
+            output.append(''.join(tmp))
+        return output
+        #超时尚未解决，结果正确
