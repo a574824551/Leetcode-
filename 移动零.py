@@ -4,7 +4,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        for i in range(len(nums)):
-            if nums[i]==0:
-                nums.remove(0)
-                nums.append(0)
+        slow=0
+        for quick in range(len(nums)):
+            if nums[quick]!=0:
+                tmp=nums[quick]
+                nums[quick]=0
+                nums[slow]=tmp
+                slow+=1
+            quick+=1
