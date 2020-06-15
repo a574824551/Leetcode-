@@ -24,4 +24,4 @@ class Solution(object):
                 stack.append(cur.right)
             if cur.left:
                 stack.append(cur.left)
-        return res二叉树的前序遍历
+        return res
